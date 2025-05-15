@@ -1,7 +1,5 @@
 # JSON Tools Suite
 
-![JSON Tools Logo](https://github.com/diogocarleto/jsontools/raw/main/logo.png)
-
 A comprehensive suite of JSON processing tools, including DataSculptor for filtering and projection, JSON Formatter for validation and formatting, and JSON Converter for transforming JSON to XML and YAML.
 
 ## Table of Contents
