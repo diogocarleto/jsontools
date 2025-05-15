@@ -1,50 +1,46 @@
-# JSON Tools Suite: DataSculptor, Formatter & Converter
+# JSON Tools Suite
+
+![JSON Tools Logo](https://github.com/diogocarleto/jsontools/raw/main/logo.png)
+
+A comprehensive suite of JSON processing tools, including DataSculptor for filtering and projection, JSON Formatter for validation and formatting, and JSON Converter for transforming JSON to XML and YAML.
+
+## Table of Contents
+
+- [Overview](#overview)
+- [DataSculptor](#datasculptor)
+  - [Core Features](#core-features)
+  - [Filter Operators](#filter-operators)
+  - [Filter Examples](#filter-examples)
+  - [Using Projections](#using-projections)
+  - [Combining Filters & Projections](#combining-filters--projections)
+- [JSON Formatter](#json-formatter)
+  - [Key Features](#json-formatter-features)
+  - [How to Use](#how-to-use-the-json-formatter)
+  - [Pro Tips](#json-formatter-pro-tips)
+- [JSON Converter](#json-converter)
+  - [Key Features](#json-converter-features)
+  - [How to Use](#how-to-use-the-json-converter)
+  - [Pro Tips](#json-converter-pro-tips)
+- [Try It Yourself](#try-it-yourself)
+- [Contribute & Support](#contribute--support)
 
 ## Overview
 
-This application provides a comprehensive suite of JSON processing tools, including:
+JSON Tools is a powerful web-based application that offers multiple tools for working with JSON data:
 
-1. **DataSculptor** - A powerful tool to sculpt your data by precisely filtering and projecting Java objects (POJOs) and JSON data
+1. **DataSculptor** - Precisely filter and project Java objects (POJOs) and JSON data
 2. **JSON Formatter** - Beautify and validate your JSON with proper indentation
 3. **JSON Converter** - Transform your JSON data to XML or YAML formats
 
 The application combines all these tools in a single interface, allowing you to seamlessly work with JSON data for various purposes - from filtering and projection to formatting and converting to other formats.
 
-## Tools Overview
+## DataSculptor
 
-### JSON Formatter
+DataSculptor is a powerful tool designed to sculpt your data by precisely filtering and projecting Java objects and JSON data. It allows you to prune nested objects, filter collections based on field values, and create projections that include only specified fields, significantly reducing memory usage and improving performance in data-heavy applications.
 
-The JSON Formatter tool allows you to:
-- Validate JSON input for syntax errors
-- Beautify JSON with proper indentation for improved readability 
-- Minify JSON by removing whitespace for reduced file size
-- Download the formatted output in JSON, XML, or YAML format
+The name reflects its purpose - like a sculptor, it carefully removes the unnecessary parts to reveal the exact data shape you need.
 
-### JSON Converter
-
-The JSON Converter enables you to:
-- Convert valid JSON to XML format with proper tag structure
-- Convert valid JSON to YAML format with correct indentation
-- Visualize the converted output with syntax highlighting
-- Download the converted data directly in the target format
-
-## Contributions & Support
-
-Have ideas for improvements or found a bug? We welcome your contributions and feedback!
-
-- **Issue Reporting**: If you encounter any bugs or issues, please report them on our [GitHub Issues page](https://github.com/diogocarleto/jsontools/issues)
-- **Feature Requests**: Have an idea for a new feature or enhancement? Submit it as an issue with the "feature request" label
-- **Questions**: For general questions about using the tools, open a discussion on GitHub
-
-All contributions, big or small, are appreciated. Visit our repository at [https://github.com/diogocarleto/jsontools](https://github.com/diogocarleto/jsontools) to get involved.
-
-### DataSculptor
-
-DataSculptor is a powerful Java library designed to sculpt your data by precisely filtering and projecting Java objects (POJOs) and JSON data. It allows you to prune nested objects, filter collections based on field values, and create projections that include only specified fields, significantly reducing memory usage and improving performance in data-heavy applications.
-
-The library's name reflects its purpose - like a sculptor, it carefully removes the unnecessary parts to reveal the exact data shape you need.
-
-## Core Features
+### Core Features
 
 - **Field Projections**: Extract only the specific fields you need from complex objects
 - **Object Filtering**: Filter collections based on field values using a powerful SQL-like DSL
@@ -55,11 +51,11 @@ The library's name reflects its purpose - like a sculptor, it carefully removes 
 - **In-place Modification**: Modify objects directly for optimal performance
 - **Complex Query Support**: Create sophisticated filters with logical operators, parentheses, and comparison operators
 
-## Supported Filter Operators
+### Filter Operators
 
-DataChisel supports a comprehensive set of operators in its filtering DSL for comparing values and creating complex conditions:
+DataSculptor supports a comprehensive set of operators in its filtering DSL for comparing values and creating complex conditions:
 
-### Comparison Operators
+#### Comparison Operators
 
 | Operator            | Text Form | Symbol Form | Description                                  | Example                                     |
 |---------------------|-----------|-------------|----------------------------------------------|---------------------------------------------|
@@ -70,370 +66,143 @@ DataChisel supports a comprehensive set of operators in its filtering DSL for co
 | Greater Than/Equal  | `gte`     | `>=`        | Checks if left value is greater or equal     | `age gte 18` or `age >= 18`                 |
 | Less Than/Equal     | `lte`     | `<=`        | Checks if left value is less than or equal   | `quantity lte 10` or `quantity <= 10`       |
 
-### Logical Operators
+#### Logical Operators
 
 | Operator | Text Form | Symbol Form | Description                      | Example                                 |
 |----------|-----------|-------------|----------------------------------|-----------------------------------------|
 | AND      | `and`     | `&&`        | Both conditions must be true     | `age > 20 and status eq 'ACTIVE'`       |
 | OR       | `or`      | `\|\|`      | At least one condition must be true | `category eq 'A' or category eq 'B'` |
 
-### Dsl String Filter example
+### Filter Examples
 
-- **Parentheses**: Group conditions to control evaluation order
-  - Example: `(age > 30 and gender eq 'M') or name eq 'Mary'`
+#### Basic Filters
+- Simple equality: `persons.age == 30`
+- String comparison: `persons.name eq 'John'`
+- Numeric comparison: `persons.children.age > 5`
+- Null check: `persons.spouse eq null`
 
-- **Type Coercion**: Automatic conversion between compatible types
-  - Numbers to strings and vice versa
-  - Different numeric types (Integer, Long, Double, etc.)
+#### Complex Filters
+- Logical operators: `persons.age > 30 and persons.gender eq 'M'`
+- Parentheses for grouping: `(persons.age > 30 and persons.gender eq 'M') or persons.name eq 'Mary'`
+- Nested properties: `persons.children.age > 10 and persons.children.gender eq 'F'`
 
-- **Null Handling**: Special handling for null values
-  - Only `eq` and `ne` operators work meaningfully with null values
-  - Example: `spouse eq 'Mary' ` or `children.name ne 'Bob'`
+#### Important Notes
+- Use parentheses to control evaluation order
+- String values must be enclosed in single quotes, e.g., `name eq 'John'`
+- Only `eq` and `ne` operators work meaningfully with null values
+- Use dot notation to access nested properties
 
-- **String Comparison**: Supports single quotes
-  - Example: `name eq 'John'`
+### Using Projections
 
-### Advanced Examples
+Projections allow you to specify exactly which fields to include in your objects, effectively pruning all other fields.
 
-## Using DslFilterHelper for Advanced Filtering
+#### Projection Examples
+- Root level field: `uuid`
+- Nested field: `persons.name`
+- Multiple nested fields: `persons.name`, `persons.age`, `persons.gender`
+- Deep nesting: `persons.children.name`
+- All fields at a level: `persons.*` (wildcard)
 
-While the string-based DSL filters are convenient for simple use cases, DataChisel provides a more powerful approach using `DslFilterHelper` for complex filtering scenarios. This approach gives you more control over how filters are applied, especially when dealing with nested structures or when you need to apply multiple filters in sequence.
+#### Benefits of Using Projections
+- Memory Efficiency: Include only the fields you need, reducing memory usage
+- Performance: Improve serialization and deserialization performance with smaller objects
+- Bandwidth Optimization: Reduce network traffic when transferring data
+- Simplified Views: Create tailored views of complex data structures
 
-### DslFilterHelper Basics
+### Combining Filters & Projections
 
-`DslFilterHelper` is a record class that encapsulates filter information with optional parameters to control filter behavior:
+DataSculptor allows you to combine the power of both filtering and projection in a single operation for highly optimized and tailored data structures.
 
-```java
-public record DslFilterHelper(
-    String filter,                                 // The DSL filter string
-    Optional<String> commonRootPrefixOptional,    // Optional root prefix override, the infra will try to detect when not informed
-    Optional<Boolean> considerOnlyFirstSegmentOptional // Control segment handling
-) { ... }
-```
+#### Example 1: Filter persons by age and project only names
+- Filter: `persons.age > 30`
+- Projections: `persons.name`, `persons.age`
+- Result: Only persons over 30 years old with just their name and age fields
 
-### Creating DslFilterHelper Instances
+#### Example 2: Filter by nested properties and project specific fields
+- Filter: `persons.children.gender eq 'F' and persons.children.age < 10`
+- Projections: `persons.name`, `persons.children.name`, `persons.children.age`
+- Result: Only persons with female children under 10, including only the specified fields
 
-There are two factory methods for creating instances:
+## JSON Formatter
 
-```java
-// Basic filter with default options
-DslFilterHelper.of("children.age > 10");
+The JSON Formatter is a simple but powerful tool that helps you validate, beautify, and work with JSON data effectively.
 
-// Advanced filter with custom options
-DslFilterHelper.of(
-    "persons.children.age > 10",           // Filter string
-    Optional.of("children"),        // Common root prefix, will prune children, when not informed will try to detect and prune in "persons" when it is the first filter.
-    Optional.of(false)              // ignored since commonRootPrefixOptional, it is useful when commonRootPrefixOptional is not informed and the filter is not the first filter, it that scenarios, it will probably detect "children" as root prefix if the filter is not the first filter.
-);
-```
+### JSON Formatter Features
 
-### Applying Multiple Filters with DslFilterHelper
+- **Validate JSON**: Instantly check if your JSON is valid and well-formatted with detailed error reporting
+- **Beautify JSON**: Transform minified JSON into properly indented, readable format
+- **View JSON**: Browse complex JSON with the integrated JSON viewer
+- **Save and Share**: Download formatted JSON or copy to clipboard with a single click
 
-The `ObjectReducer.applyDslFilters` method accepts a list of `DslFilterHelper` instances, allowing you to apply multiple filters in sequence. This is particularly useful for:
+### How to Use the JSON Formatter
 
-1. Filtering at different levels of a nested object structure
-2. Applying progressive filtering where each filter builds on the results of the previous one
-3. Fine-tuning how path segments are interpreted for each filter
+1. Select the "JSON Formatter" tab in the main playground
+2. Enter or paste your JSON data into the input field
+3. Alternatively, upload a JSON file or enter a URL to fetch remote JSON
+4. Click "Validate JSON" to check for syntax errors with detailed feedback
+5. Click "Format JSON" to beautify your valid JSON
+6. View the formatted result in the output panel
+7. Use the download or copy buttons to save or share your formatted JSON
 
-### Examples
+### JSON Formatter Pro Tips
 
-#### Example 1: Multi-level Filtering with Person Hierarchy
+- **Large JSON Files**: The formatter can handle large JSON files up to 8MB in size
+- **Remote JSON**: Load JSON directly from a URL by entering the web address in the URL field
+- **Expanded View**: Use the expand button for a larger view of complex JSON structures
+- **Error Highlighting**: Quickly identify syntax errors with helpful highlighting and error messages
+- **Detailed Error Reporting**: When validation fails, get specific information about line and column numbers where errors occur
 
-This example demonstrates filtering a family structure with multiple levels (parent → children → grandchildren):
+## JSON Converter
 
-```java
-// Create a person hierarchy with parent, children, and grandchildren
-Person parent = createFamilyHierarchy();
+The JSON Converter is a versatile independent tool that allows you to convert from JSON to other popular data formats including XML and YAML.
 
-// Apply multiple filters with different nesting levels
-ObjectReducer.applyDslFilters(parent, List.of(
-    DslFilterHelper.of("children.age < 21"),                // Keep younger children
-    DslFilterHelper.of("children.gender == 'female'"),      // Keep only female children
-    DslFilterHelper.of("children.children.age < 9")         // Keep only young grandchildren
-));
+### JSON Converter Features
 
-// Result: Only female children under 21 with their grandchildren under 9 remain
-```
+- **One-way Conversion**: Convert from JSON to XML or YAML formats
+- **Multiple Format Support**: Convert JSON to XML and YAML target formats
+- **Pretty Formatting**: Output is automatically formatted for readability
+- **Download Options**: Save converted data in your preferred format
 
-#### Example 2: Filtering Company Departments and Employees
+### How to Use the JSON Converter
 
-This example shows how to filter a company structure with departments and employees:
+1. Select the "JSON Converter" tab in the main playground
+2. Enter or paste your JSON data into the input field, or upload a JSON file
+3. Select the target format you want to convert to (XML or YAML) from the dropdown
+4. Click "Convert" to transform your data
+5. View the converted result in the output panel
+6. Use the download button to save the result in your selected format
 
-```java
-// Create a company with departments and employees
-Company company = createCompanyStructure();
+### JSON Converter Pro Tips
 
-// Apply filters to keep senior employees in specific departments
-ObjectReducer.applyDslFilters(company, List.of(
-    DslFilterHelper.of("departments.name == 'Engineering'"),  // Keep only Engineering department
-    DslFilterHelper.of("departments.employees.position eq 'Manager' and departments.employees.age > 40") // Keep senior managers
-));
+- **XML Attributes**: When converting from JSON to XML, nested objects can be represented as either nested elements or attributes
+- **YAML Indentation**: The converter handles YAML's strict indentation requirements automatically
+- **JSON Validation**: Your JSON input is automatically validated before conversion
+- **Integration**: Use the converter in conjunction with DataSculptor to filter data and then convert it to your preferred format
 
-// Result: Only the Engineering department with senior managers remains
-```
+## Try It Yourself
 
-#### Example 3: Filtering with Null Comparisons
+Ready to start using these powerful JSON tools? Go to the [JSON Tools Playground](https://jsontools.carleto.io) to experiment with:
 
-This example demonstrates filtering with null value comparisons:
+- **DataSculptor**: Try different filter and projection combinations on your JSON data
+- **JSON Formatter**: Format, validate, and work with your JSON data in a clean interface
+- **JSON Converter**: Convert JSON data to XML and YAML formats with a simple interface
 
-```java
-// Create a person with some children having null gender values
-Person person = createPersonWithChildren();
+## Contribute & Support
 
-// Apply filter to keep only children with null gender or specific name
-ObjectReducer.applyDslFilters(person, List.of(
-    DslFilterHelper.of("children.gender == null or children.name == 'Child3'")
-));
+We welcome your feedback, bug reports, and feature requests to help improve JSON Tools!
 
-// Result: Only children with null gender or named 'Child3' remain
-```
+### How to Contribute
 
-#### Example 4: Filtering JSON Data
+- **Report Issues**: Found a bug? Let us know by [creating an issue](https://github.com/diogocarleto/jsontools/issues) on GitHub
+- **Feature Requests**: Have an idea for a new feature? Submit it as an issue with the "feature request" label on our [GitHub repository](https://github.com/diogocarleto/jsontools)
+- **Ask Questions**: For general questions, start a discussion on our GitHub repository
 
-This example shows filtering JSON data with nested structures:
+All contributions, big or small, are appreciated. Visit our repository at [https://github.com/diogocarleto/jsontools](https://github.com/diogocarleto/jsontools) to get involved.
 
-```java
-// Parse JSON string into an object structure
-Object jsonObject = parseJsonString(jsonData);
+## License
 
-// Apply filters to the JSON structure
-ObjectReducer.applyDslFilters(jsonObject, List.of(
-    DslFilterHelper.of("families.members.age > 40"),          // Keep only members over 40
-    DslFilterHelper.of("families.members.children.gender == 'F'") // Keep only female children
-));
+This project is licensed under the MIT License - see the LICENSE file for details.
 
-// Result: JSON structure with only members over 40 and their female children
-```
+---
 
-### Benefits of Using DslFilterHelper
-
-- **Sequential Filtering**: Apply filters in a specific order to achieve complex filtering logic
-- **Fine-grained Control**: Control how path segments are interpreted for each filter
-- **Optimized Performance**: Reduce unnecessary processing by filtering at different levels
-- **Improved Readability**: Break complex filtering logic into smaller, more manageable pieces
-
-## Using Projections with ObjectReducerProjectionTreeFilter
-
-In addition to filtering, DataChisel provides powerful projection capabilities through the `ObjectReducerProjectionTreeFilter` class. Projections allow you to specify exactly which fields to include in your objects, effectively pruning all other fields. This is particularly useful for:
-
-1. Reducing memory usage by excluding unnecessary fields
-2. Improving serialization performance by reducing object size
-3. Creating tailored views of your data for specific use cases
-4. Simplifying complex object structures
-
-### ObjectReducerProjectionTreeFilter Basics
-
-The `ObjectReducerProjectionTreeFilter` class builds a tree structure that represents the fields to include in your projection. You can create projection filters using the static `build` method:
-
-```java
-// Create a projection filter for specific fields
-List<ObjectReducerProjectionTreeFilter> projectionFilters = 
-    ObjectReducerProjectionTreeFilter.build(List.of("uuid", "name", "address.city"));
-```
-
-### Applying Projections
-
-Use the `ObjectReducer.applyProjections` method to apply your projections to an object:
-
-```java
-// Apply projections to include only specified fields
-ObjectReducer.applyProjections(entity, projectionFilters);
-```
-
-### Examples
-
-#### Example 1: Basic Field Projection
-
-This example demonstrates how to include only specific fields at the root level:
-
-```java
-// Create a space object with multiple fields
-SpaceResponse space = SpaceResponse.of("space-123", "Meeting Room", 500L);
-
-// Apply projection to keep only the UUID field
-ObjectReducer.applyProjections(
-    space, 
-    ObjectReducerProjectionTreeFilter.build(List.of("uuid"))
-);
-
-// Result: space object now only has uuid field populated, other fields are null
-// space.uuid = "space-123";
-// space.name = null;
-// space.size = null;
-```
-
-#### Example 2: Nested Field Projection
-
-This example shows how to include fields from nested objects:
-
-```java
-// Create a company with departments and employees
-Company company = createCompanyStructure();
-
-// Apply projections to include only specific nested fields
-ObjectReducer.applyProjections(
-    company, 
-    ObjectReducerProjectionTreeFilter.build(List.of(
-        "name",
-        "departments.name",
-        "departments.employees.name"
-    ))
-);
-
-// Result: Only company name, department names, and employee names are included
-// All other fields like employee age, salary, etc. are set to null
-```
-
-#### Example 3: Wildcard Projection
-
-This example demonstrates using wildcards to include all fields at a specific level:
-
-```java
-// Create a space with rooms and products
-SpaceResponse space = createSpaceWithRoomsAndProducts();
-
-// Apply projections with wildcards
-ObjectReducer.applyProjections(
-    space,
-    ObjectReducerProjectionTreeFilter.build(List.of(
-        "uuid",
-        "rooms.*"  // Include all direct fields of rooms
-    ))
-);
-
-// Result: space.uuid is included, all direct fields of rooms are included
-// but nested objects within rooms (like products) retain all their fields
-```
-
-#### Example 4: Combining Projections and Filters
-
-This example shows how to combine projections with filters for maximum data sculpting:
-
-```java
-// Create a space with rooms and products
-SpaceResponse space = createSpaceWithRoomsAndProducts();
-
-// Apply both projections and filters
-ObjectReducer.applyProjectionsAndDslFilters(
-    space,
-    ObjectReducerProjectionTreeFilter.build(List.of(
-        "uuid", 
-        "rooms.uuid", 
-        "rooms.title", 
-        "rooms.products.*"  // Include all fields of products
-    )),
-    List.of(
-        DslFilterHelper.of("rooms.uuid eq 'room-123' and rooms.products.price > 1000")
-    )
-);
-
-// Result: Only rooms with uuid 'room-123' and products with price > 1000 are included
-// Only the specified fields are populated, others are null
-```
-
-### Benefits of Using Projections
-
-- **Memory Efficiency**: Include only the fields you need, reducing memory usage
-- **Performance**: Improve serialization and deserialization performance with smaller objects
-- **Bandwidth Optimization**: Reduce network traffic when transferring data
-- **Simplified Views**: Create tailored views of complex data structures
-- **Targeted Data Access**: Access only the specific data paths you need
-
-### Projection Patterns
-
-- **Root Level Fields**: Simple field names like `"name"` or `"uuid"`
-- **Nested Fields**: Dot notation paths like `"department.employees.name"`
-- **Wildcards**: Use `"*"` to include all fields at a specific level, like `"rooms.*"`
-- **Combined Patterns**: Mix specific fields and wildcards as needed
-
-## Combining Filters and Projections
-
-DataChisel allows you to combine the power of both filtering and projection in a single operation using the method:
-
-```java
-ObjectReducer.applyProjectionsAndDslFilters(
-    entity,
-    List<ObjectReducerProjectionTreeFilter> treeFilterList,
-    List<DslFilterHelper> dslFilterHelpers
-);
-```
-
-This enables you to first filter your data (removing unwanted elements from collections or nested objects) and then project only the fields you care about, resulting in highly optimized and tailored data structures.
-
-### Example 1: Filter and Project Nested Collections
-
-```java
-// Create a space with rooms and products
-SpaceResponse space = createSpaceWithRoomsAndProducts();
-
-// Define projection: keep only uuid, room details, and all product fields in rooms
-List<ObjectReducerProjectionTreeFilter> projections = ObjectReducerProjectionTreeFilter.build(List.of(
-    "uuid",
-    "rooms.uuid",
-    "rooms.title",
-    "rooms.products.*"
-));
-
-// Define filters: keep only rooms and products matching certain criteria
-List<DslFilterHelper> filters = List.of(
-    DslFilterHelper.of("rooms.uuid eq 'room-123' and rooms.products.price > 1000")
-);
-
-// Apply both filters and projections
-ObjectReducer.applyProjectionsAndDslFilters(space, projections, filters);
-
-// Result: Only rooms with uuid 'room-123' and products with price > 1000 are included,
-// and only the specified fields are populated (others are set to null)
-```
-
-### Example 2: Multi-level Filtering and Projection
-
-```java
-// Create a company with departments and employees
-Company company = createCompanyStructure();
-
-// Define projections to keep only department and employee names
-List<ObjectReducerProjectionTreeFilter> projections = ObjectReducerProjectionTreeFilter.build(List.of(
-    "departments.name",
-    "departments.employees.name"
-));
-
-// Define filters to keep only employees with salary > 90000
-List<DslFilterHelper> filters = List.of(
-    DslFilterHelper.of("departments.employees.salary > 90000")
-);
-
-ObjectReducer.applyProjectionsAndDslFilters(company, projections, filters);
-
-// Result: Only departments and employees matching the filter remain, and only their names are present
-```
-
-### Example 3: Wildcards and Filtering
-
-```java
-// Create a space with rooms and products
-SpaceResponse space = createSpaceWithRoomsAndProducts();
-
-// Projection: keep all fields of rooms, but only uuid of products
-List<ObjectReducerProjectionTreeFilter> projections = ObjectReducerProjectionTreeFilter.build(List.of(
-    "rooms.*",
-    "rooms.products.uuid"
-));
-
-// Filter: keep only products with uuid starting with 'prod-'
-List<DslFilterHelper> filters = List.of(
-    DslFilterHelper.of("rooms.products.uuid =~ 'prod-.*'")
-);
-
-ObjectReducer.applyProjectionsAndDslFilters(space, projections, filters);
-
-// Result: All room fields are present, but for products only uuid is included, and only products matching filter remain
-```
-
-### Why Combine Filters and Projections?
-
-- **Maximum Efficiency**: Remove unnecessary data and fields in a single pass
-- **Tailored Results**: Produce objects optimized for your downstream consumers
-- **Cleaner APIs**: Return only what is needed, nothing more
-- **Improved Security**: Exclude sensitive or irrelevant fields by default
-
+&copy; 2025 Deckend. JSON Tools Playground - Powerful JSON filtering, projection, formatting, and conversion capabilities. 
