@@ -185,11 +185,11 @@ The JSON Converter is a versatile independent tool that allows you to convert fr
 
 ## JSON Rewriter
 
-The JSON Rewriter is a powerful tool that allows you to modify specific fields in your JSON data using JSONPath expressions, making it easy to transform and update JSON structures without complex programming.
+The JSON Rewriter is a powerful tool that allows you to modify specific fields in your JSON data using dot notation paths, making it easy to transform and update JSON structures without complex programming.
 
 ### JSON Rewriter Features
 
-- **Field Modification**: Update specific fields in your JSON using JSONPath expressions
+- **Field Modification**: Update specific fields in your JSON using dot notation paths
 - **Multiple Rewrites**: Apply multiple field modifications in a single operation
 - **Nested Field Support**: Modify deeply nested fields with intuitive path notation
 - **Value Validation**: Ensure new values are valid JSON before applying changes
@@ -201,7 +201,7 @@ The JSON Rewriter is a powerful tool that allows you to modify specific fields i
 1. Select the "JSON Rewriter" tab in the main playground
 2. Enter or paste your JSON data into the input field
 3. Add one or more rewrite rules:
-   - Enter the JSONPath expression for the field to modify
+   - Enter the dot notation path for the field to modify
    - Provide the new value in valid JSON format
 4. Click "Apply Changes" to modify your JSON
 5. View the modified result in the output panel
@@ -209,7 +209,7 @@ The JSON Rewriter is a powerful tool that allows you to modify specific fields i
 
 ### JSON Rewriter Pro Tips
 
-- **JSONPath Syntax**: Use dot notation for nested fields (e.g., `user.address.city`)
+- **Path Syntax**: Use dot notation for nested fields (e.g., `user.address.city`)
 - **Array Elements**: Access array elements using index notation (e.g., `users.0.name`)
 - **Wildcards**: Use `*` to match all elements in an array or object
 - **Complex Paths**: Combine multiple path expressions for sophisticated modifications
@@ -218,11 +218,14 @@ The JSON Rewriter is a powerful tool that allows you to modify specific fields i
 
 ## Try It Yourself
 
-Ready to start using these powerful JSON tools? Go to the [JSON Tools Playground](https://jsontools.carleto.io) to experiment with:
+Ready to start using these powerful JSON tools? Visit [https://jsontools.deckend.io](https://jsontools.deckend.io) to try out:
 
 - **DataSculptor**: Try different filter and projection combinations on your JSON data
-- **JSON Formatter**: Format, validate, and work with your JSON data in a clean interface
-- **JSON Converter**: Convert JSON data to XML and YAML formats with a simple interface
+- **JSON Formatter**: Format and validate your JSON data
+- **JSON Converter**: Convert between JSON, XML, YAML, and CSV formats
+- **JSON Rewriter**: Modify specific fields in your JSON using dot notation paths
+
+Each tool features a clean, intuitive interface and real-time preview of your changes.
 
 ## Contribute & Support
 
