@@ -1,5 +1,7 @@
 # JSON Tools Suite
 
+![JSON Tools Logo](https://github.com/diogocarleto/jsontools/raw/main/logo.png)
+
 A comprehensive suite of JSON processing tools, including DataSculptor for filtering and projection, JSON Formatter for validation and formatting, and JSON Converter for transforming JSON to XML and YAML.
 
 ## Table of Contents
@@ -19,6 +21,10 @@ A comprehensive suite of JSON processing tools, including DataSculptor for filte
   - [Key Features](#json-converter-features)
   - [How to Use](#how-to-use-the-json-converter)
   - [Pro Tips](#json-converter-pro-tips)
+- [JSON Rewriter](#json-rewriter)
+  - [Key Features](#json-rewriter-features)
+  - [How to Use](#how-to-use-the-json-rewriter)
+  - [Pro Tips](#json-rewriter-pro-tips)
 - [Try It Yourself](#try-it-yourself)
 - [Contribute & Support](#contribute--support)
 
@@ -176,6 +182,39 @@ The JSON Converter is a versatile independent tool that allows you to convert fr
 - **YAML Indentation**: The converter handles YAML's strict indentation requirements automatically
 - **JSON Validation**: Your JSON input is automatically validated before conversion
 - **Integration**: Use the converter in conjunction with DataSculptor to filter data and then convert it to your preferred format
+
+## JSON Rewriter
+
+The JSON Rewriter is a powerful tool that allows you to modify specific fields in your JSON data using JSONPath expressions, making it easy to transform and update JSON structures without complex programming.
+
+### JSON Rewriter Features
+
+- **Field Modification**: Update specific fields in your JSON using JSONPath expressions
+- **Multiple Rewrites**: Apply multiple field modifications in a single operation
+- **Nested Field Support**: Modify deeply nested fields with intuitive path notation
+- **Value Validation**: Ensure new values are valid JSON before applying changes
+- **Preview Changes**: See the impact of your changes before applying them
+- **Batch Processing**: Apply the same modifications to multiple JSON documents
+
+### How to Use the JSON Rewriter
+
+1. Select the "JSON Rewriter" tab in the main playground
+2. Enter or paste your JSON data into the input field
+3. Add one or more rewrite rules:
+   - Enter the JSONPath expression for the field to modify
+   - Provide the new value in valid JSON format
+4. Click "Apply Changes" to modify your JSON
+5. View the modified result in the output panel
+6. Use the download or copy buttons to save or share your modified JSON
+
+### JSON Rewriter Pro Tips
+
+- **JSONPath Syntax**: Use dot notation for nested fields (e.g., `user.address.city`)
+- **Array Elements**: Access array elements using index notation (e.g., `users.0.name`)
+- **Wildcards**: Use `*` to match all elements in an array or object
+- **Complex Paths**: Combine multiple path expressions for sophisticated modifications
+- **Value Types**: Ensure new values match the expected type of the target field
+- **Validation**: Always validate your JSON after making modifications
 
 ## Try It Yourself
 
