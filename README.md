@@ -218,7 +218,7 @@ The JSON Rewriter is a powerful tool that allows you to modify specific fields i
 
 ## Try It Yourself
 
-Ready to start using these powerful JSON tools? Visit [https://jsontools.deckend.io](https://jsontools.deckend.io) to try out:
+Ready to start using these powerful JSON tools? Visit [https://jsontools.deckend.io](https://jsontools.io) to try out:
 
 - **DataSculptor**: Try different filter and projection combinations on your JSON data
 - **JSON Formatter**: Format and validate your JSON data
